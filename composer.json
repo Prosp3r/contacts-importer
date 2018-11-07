@@ -15,7 +15,6 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "sabre/dav": "~3.2.0",
         "league/oauth2-client": "^2.0",
         "hayageek/oauth2-yahoo": "dev-master",
         "league/oauth2-google": "dev-master",

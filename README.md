@@ -1,21 +1,45 @@
-The MIT License (MIT)
+# Contacts Importer
 
-Copyright (c) 2018 Cang Ho <cang@heavenaddress.com>
+## Installation
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+To install, use composer:
+```
+composer require cang-ha/contacts-importer
+```
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+## Usage
+```
+$clientID = 'your_client_id';
+$clientSecret = 'your_client_secret';
+$redirectUri = 'your_redirect_url';
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+$googleImporter = new GoogleImporter($clientID, $clientSecret, $redirectUri);
+
+try {
+    $googleImporter->processCallback();
+    $contactsGoogle = $googleImporter->getContacts();
+
+    //store token for later use
+    $tokenGoogle = [
+        'accessToken' => $googleImporter->getAccessToken(),
+        'refreshToken' => $googleImporter->getRefreshToken(),
+        'expires' => $googleImporter->getExpires()
+    ];
+    $_SESSION['stored_google_token'] = serialize($tokenGoogle);
+    
+    // display the contacts
+    foreach ($contactsGoogle as $contact) {
+        echo ('Full name: '. $contact->getFullName());
+        echo ('<br>First name: '. $contact->getFirstName());
+        echo ('<br>Last name: '. $contact->getLastName());
+        echo ('<br>Email: '. $contact->getEmail());
+    }
+
+} catch (\ContactImporter\Exception\OAuth2\OAuth2InvalidAuthCodeException $e) {
+    // handle case where use deny the oauth2 request
+
+} catch (\GuzzleHttp\Exception\GuzzleException $e) {
+    // handle restful api request error
+}
+    
+```
