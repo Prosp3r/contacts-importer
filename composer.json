@@ -1,7 +1,10 @@
 {
-    "name": "cang-ha/contact-importer",
+    "name": "cang-ha/contacts-importer",
     "description": "Contact importer wrapper for Google, Outlook, Yahoo",
+    "keywords": ["contact", "email", "gmail", "google", "outlook", "office365", "yahoo", "microsoft"],
     "type": "library",
+    "homepage": "https://github.com/cang-ha/contacts-importer",
+    "license": "MIT",
     "authors": [
         {
             "name": "Cang Ho",
