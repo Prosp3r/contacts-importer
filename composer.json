@@ -1,0 +1,25 @@
+{
+    "name": "htcang/contact-importer",
+    "description": "Contact importer wrapper for Google, Outlook, iCloud, Yahoo",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Cang",
+            "email": "htcang.p@gmail.com"
+        }
+    ],
+    "autoload-dev": {
+        "psr-4": {
+            "ContactImporter\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "sabre/dav": "~3.2.0",
+        "league/oauth2-client": "^2.0",
+        "hayageek/oauth2-yahoo": "dev-master",
+        "league/oauth2-google": "dev-master",
+        "guzzlehttp/guzzle": "^6.0",
+        "microsoft/microsoft-graph": "^1.5"
+    }
+}
