@@ -20,8 +20,8 @@
         "microsoft/microsoft-graph": "^1.5"
     },
     "autoload": {
-        "psr-0": {
-            "ContactImporter": "src/"
+        "psr-4": {
+            "ContactImporter\\": "src/"
         }
     }
 }
