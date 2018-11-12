@@ -18,5 +18,10 @@
         "league/oauth2-google": "dev-master",
         "guzzlehttp/guzzle": "^6.0",
         "microsoft/microsoft-graph": "^1.5"
-    }
+    },
+    "autoload": {
+        "psr-0": {
+            "ContactImporter": "src/"
+        }
+    },
 }
