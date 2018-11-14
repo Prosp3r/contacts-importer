@@ -122,9 +122,9 @@ class YahooImporter extends OAuth2ContactImporter
                 ]);
 
                 $_SESSION['YahooImporterToken'] = serialize($token);
-                header("Location: {$this->redirectUri}");
             }
         }
+        header("Location: {$this->redirectUri}");
     }
 
     /**

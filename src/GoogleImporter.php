@@ -113,9 +113,9 @@ class GoogleImporter extends OAuth2ContactImporter
                 ]);
 
                 $_SESSION['GoogleImporterToken'] = serialize($token);
-                header("Location: {$this->redirectUri}");
             }
         }
+        header("Location: {$this->redirectUri}");
     }
 
     /**

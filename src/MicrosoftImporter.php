@@ -148,9 +148,10 @@ class MicrosoftImporter extends OAuth2ContactImporter
                 ]);
 
                 $_SESSION['MicrosoftImporterToken'] = serialize($token);
-                header("Location: {$this->redirectUri}?from=Microsoft");
+
             }
         }
+        header("Location: {$this->redirectUri}");
     }
 
     /**
