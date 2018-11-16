@@ -55,7 +55,7 @@ class GoogleImporter extends OAuth2ContactImporter
         $client = new Client();
 
         $options = ['headers' => [
-            'Authorization' => "Bearer {$this->accessToken}",
+            'Authorization' => "Bearer ". $this->getAccessToken(),
             'Accept' => 'application/json',
             'content-type' => 'application/json'
         ]];
