@@ -14,6 +14,7 @@ use League\OAuth2\Client\Token\AccessToken;
 class GoogleImporter extends OAuth2ContactImporter
 {
     const CONTACT_URI = 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=200&v=3.0';
+    const REVOKE_TOKEN_URI = 'https://accounts.google.com/o/oauth2/revoke';
     /**
      * @param string $clientId
      * @param string $clientSecret
@@ -116,6 +117,37 @@ class GoogleImporter extends OAuth2ContactImporter
             }
         }
         header("Location: {$this->redirectUri}");
+    }
+
+    function revokeToken()
+    {
+        $client = new Client();
+
+        $options = [
+            'headers' => [
+                'Authorization' => "Bearer ". $this->getAccessToken(),
+                'Accept' => 'application/json',
+                'content-type' => 'application/json'
+            ],
+            'query' => [
+                'token' => $this->getAccessToken()
+            ]
+        ];
+        try {
+            $response = $client->request('GET', self::REVOKE_TOKEN_URI, $options);
+            $status = $response->getStatusCode();
+            if ($status == 200) {
+                return true;
+            }
+            else {
+                return false;
+            }
+
+        }
+        catch (\GuzzleHttp\Exception\GuzzleException $e) {
+            throw $e;
+        }
+
     }
 
     /**
